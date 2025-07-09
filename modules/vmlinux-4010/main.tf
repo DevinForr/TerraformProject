@@ -50,17 +50,14 @@ resource "azurerm_linux_virtual_machine" "vm" {
   resource_group_name = var.resource_group_name
   size                = "Standard_B1ms"
   admin_username      = "azureuser"
+  admin_password      = "P@ssw0rd!"
+  disable_password_authentication = false
 
   network_interface_ids = [
     azurerm_network_interface.nic[each.key].id,
   ]
 
   availability_set_id = azurerm_availability_set.avset.id
-
-  admin_ssh_key {
-    username   = "azureuser"
-    public_key = file("${path.module}/id_rsa.pub")
-  }
 
   os_disk {
     caching              = "ReadWrite"
