@@ -1,7 +1,7 @@
 resource "azurerm_managed_disk" "datadisk" {
-  for_each = var.vm_ids
+  for_each = zipmap(var.vm_ids, var.vm_ids)
 
-  name                 = "${var.humber_id}-${each.key}-datadisk"
+  name                 = "${var.humber_id}-datadisk-${each.key}"
   location             = var.location
   resource_group_name  = var.resource_group_name
   storage_account_type = "Standard_LRS"
