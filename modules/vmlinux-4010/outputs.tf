@@ -19,7 +19,7 @@ output "nic_ids" {
   value       = { for k, nic in azurerm_network_interface.nic : k => nic.id }
 }
 
-output "linux_vm_ids" {
+output "vm_ids" {
   value = {
     for idx, name in local.vm_names :
     name => azurerm_linux_virtual_machine.vm[idx].id
