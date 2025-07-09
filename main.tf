@@ -37,6 +37,11 @@ module "linux_vms" {
   resource_group_name     = module.rgroup.resource_group_name
   subnet_id               = module.network.subnet_id
   diagnostics_storage_uri = "https://${module.common.storage_account_name}.blob.core.windows.net/"
+  linux_vm_ids = {
+    vm0 = module.linux_vms.vm_ids["vm0"]
+    vm1 = module.linux_vms.vm_ids["vm1"]
+    vm2 = module.linux_vms.vm_ids["vm2"]
+  }
 }
 
 module "win_vm" {
