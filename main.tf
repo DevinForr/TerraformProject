@@ -55,10 +55,12 @@ module "datadisk" {
   humber_id           = local.humber_id
   location            = local.location
   resource_group_name = module.rgroup.resource_group_name
-  vm_ids = concat(
-  module.linux_vms.vm_ids,
-  [module.win_vm.vm_id]
-)
+  vm_ids = vm_ids = {
+  vm0 = module.linux_vms.vm_ids[0]
+  vm1 = module.linux_vms.vm_ids[1]
+  vm2 = module.linux_vms.vm_ids[2]
+  win = module.win_vm.vm_id
+}
 }
 
 module "loadbalancer" {
