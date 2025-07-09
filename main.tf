@@ -61,9 +61,9 @@ module "datadisk" {
   location            = local.location
   resource_group_name = module.rgroup.resource_group_name
   vm_ids = {
-  vm0 = module.linux_vms.vm_ids[0]
-  vm1 = module.linux_vms.vm_ids[1]
-  vm2 = module.linux_vms.vm_ids[2]
+    vm0 = module.linux_vms.vm_ids["vm0"]
+  vm1 = module.linux_vms.vm_ids["vm1"]
+  vm2 = module.linux_vms.vm_ids["vm2"]
   win = module.win_vm.vm_id
 }
 }
