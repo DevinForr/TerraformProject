@@ -19,4 +19,5 @@ resource "azurerm_postgresql_database" "defaultdb" {
   server_name         = azurerm_postgresql_flexible_server.postgres.name
   charset             = "UTF8"
   collation           = "en_US.UTF8"
+  depends_on = [azurerm_postgresql_flexible_server.postgres]
 }

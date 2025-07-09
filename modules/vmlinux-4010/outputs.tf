@@ -23,7 +23,7 @@ output "network_interface_ids" {
 
 output "vm_ids" {
   value = {
-    for k in local.vm_names :
-    k => azurerm_linux_virtual_machine.vm[k].id
+    for name, vm in azurerm_linux_virtual_machine.vm :
+    name => vm.id
   }
 }

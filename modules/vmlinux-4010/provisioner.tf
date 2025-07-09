@@ -25,13 +25,19 @@ resource "azurerm_virtual_machine_extension" "network_watcher" {
   virtual_machine_id   = each.value
   publisher            = "Microsoft.Azure.NetworkWatcher"
   type                 = "NetworkWatcherAgentLinux"
-  type_handler_version = "1.0"
+  type_handler_version = "1.4"
+}
+
+locals {
+  vm_map = azurerm_linux_virtual_machine.vm
 }
 
 resource "azurerm_virtual_machine_extension" "azure_monitor" {
-  for_each             = var.linux_vm_ids
-   name                 = "azure-monitor-${each.value}"
-  virtual_machine_id   = azurerm_linux_virtual_machine.vm[each.value].id
+  for_each = var.linux_vm_ids  # map(name => vm_id)
+
+  name               = "azure-monitor-${each.key}"
+  virtual_machine_id = each.value
+
   publisher            = "Microsoft.Azure.Monitor"
   type                 = "AzureMonitorLinuxAgent"
   type_handler_version = "1.0"

@@ -45,4 +45,7 @@ Name = "firstname.lastname"
 ExpirationDate = "2024-12-31"
 Environment = "Learning"
   }
+  
+  vm_names = ["vm1", "vm2", "vm3"]
+
 }
