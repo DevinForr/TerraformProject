@@ -21,7 +21,7 @@ output "nic_ids" {
 
 output "vm_ids" {
   value = {
-    for idx, name in local.vm_names :
-    name => azurerm_linux_virtual_machine.vm[idx].id
+    for name in local.vm_names :
+    name => azurerm_linux_virtual_machine.vm[name].id
   }
 }

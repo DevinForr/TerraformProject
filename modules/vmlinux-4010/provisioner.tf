@@ -29,7 +29,7 @@ resource "azurerm_virtual_machine_extension" "azure_monitor" {
   for_each = azurerm_linux_virtual_machine.vm
 
   name                 = "azure-monitor-${each.key}"
-  virtual_machine_id   = each.value.id
+  virtual_machine_id   = each.value
   publisher            = "Microsoft.Azure.Monitor"
   type                 = "AzureMonitorLinuxAgent"
   type_handler_version = "1.0"
