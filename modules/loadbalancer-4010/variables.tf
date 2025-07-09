@@ -13,7 +13,7 @@ variable "location" {
 variable "resource_group_name" {
   description = "Name of the resource group"
   type        = string
-  default     = "4010-RG"
+  default     = "rgroup-4010"
 }
 
 variable "linux_nic_ids" {
