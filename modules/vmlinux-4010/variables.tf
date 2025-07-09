@@ -38,9 +38,9 @@ variable "linux_vm_ids" {
   type        = map(string)
   description = "Map of Linux VM IDs (vm0, vm1, vm2)"
   default     = {
-    vm0 = "vm0-id"
-    vm1 = "vm1-id"
-    vm2 = "vm2-id"
+    vm0 = module.linux_vms.vm_ids["vm0"]
+   vm1 = module.linux_vms.vm_ids["vm1"]
+   vm2 = module.linux_vms.vm_ids["vm2"]
   }
 }
 
