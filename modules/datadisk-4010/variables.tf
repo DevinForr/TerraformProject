@@ -10,11 +10,19 @@ variable "resource_group_name" {
   default = "rgroup-4010"
 }
 
+variable "vm_names" {
+  type    = list(string)
+  default = ["vm0", "vm1", "vm2", "win"]
+}
 
 variable "vm_ids" {
-    description = "List of VM IDs to attach the data disk to"
-    type        = list(string)
-    default     = []
+  type = map(string)
+  default = {
+    vm0 = "vm0-id"
+    vm1 = "vm1-id"
+    vm2 = "vm2-id"
+    win = "win-id"
+  }
 }
 
 locals {
