@@ -7,8 +7,8 @@ resource "null_resource" "hostname_exec" {
     connection {
       type        = "ssh"
       host        = azurerm_public_ip.vm_pip[each.key].ip_address
-      user        = "azureuser"
-      private_key = file("${path.module}/id_rsa")  # Ensure this key matches public_key
+      user     = "azureuser"
+      password = "P@ssw0rd!"  
     }
   }
 

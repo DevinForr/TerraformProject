@@ -72,7 +72,7 @@ resource "azurerm_windows_virtual_machine" "win_vm" {
 
 resource "azurerm_virtual_machine_extension" "antimalware" {
   name                 = "IaaSAntimalware"
-  virtual_machine_id   = azurerm_windows_virtual_machine.vm.id
+  virtual_machine_id   = azurerm_windows_virtual_machine.win_vm.id
   publisher            = "Microsoft.Azure.Security"
   type                 = "IaaSAntimalware"
   type_handler_version = "1.5"
