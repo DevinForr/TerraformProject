@@ -10,8 +10,13 @@ resource "azurerm_managed_disk" "datadisk" {
   tags                 = local.tags
 }
 
+locals {
+  vm_map = zipmap(var.vm_ids, var.vm_ids)
+}
+
+# Attach each disk to its corresponding VM
 resource "azurerm_virtual_machine_data_disk_attachment" "attach_disk" {
-  for_each = var.vm_ids
+  for_each = local.vm_map
 
   managed_disk_id    = azurerm_managed_disk.datadisk[each.key].id
   virtual_machine_id = each.value
