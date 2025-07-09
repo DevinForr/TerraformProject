@@ -1,7 +1,3 @@
-locals {
-  vm_names = ["vm1", "vm2", "vm3"]
-}
-
 resource "azurerm_availability_set" "avset" {
   name                         = "${var.humber_id}-avset"
   location                     = var.location
