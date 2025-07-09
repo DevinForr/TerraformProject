@@ -14,14 +14,16 @@ output "public_ips" {
   value = { for k, pip in azurerm_public_ip.vm_pip : k => pip.ip_address }
 }
 
-output "nic_ids" {
-  description = "NIC IDs for each Linux VM"
-  value       = { for k, nic in azurerm_network_interface.nic : k => nic.id }
+output "network_interface_ids" {
+  value = {
+    for k in local.vm_names :
+    k => azurerm_network_interface.nic[k].id
+  }
 }
 
 output "vm_ids" {
   value = {
-    for vm_name, vm in azurerm_linux_virtual_machine.vm : vm_name => vm.id
+    for k in local.vm_names :
+    k => azurerm_linux_virtual_machine.vm[k].id
   }
-  description = "Map of Linux VM IDs keyed by VM names"
 }

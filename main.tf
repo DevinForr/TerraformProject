@@ -7,6 +7,7 @@ locals {
     ExpirationDate = "2024-12-31"
     Environment    = "Learning"
   }
+  vm_names = ["vm1", "vm2", "vm3"]
 }
 
 module "rgroup" {
@@ -73,7 +74,8 @@ module "loadbalancer" {
   humber_id           = local.humber_id
   location            = local.location
   resource_group_name = module.rgroup.resource_group_name
-  linux_nic_ids       = module.linux_vms.nic_ids
+  linux_nic_ids = module.linux_vms.network_interface_ids
+
 }
 
 module "database" {
