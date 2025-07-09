@@ -34,6 +34,16 @@ variable "diagnostics_storage_uri" {
     default     = null
 }
 
+variable "linux_vm_ids" {
+  type        = map(string)
+  description = "Map of Linux VM IDs (vm0, vm1, vm2)"
+  default     = {
+    vm0 = "vm0-id"
+    vm1 = "vm1-id"
+    vm2 = "vm2-id"
+  }
+}
+
 locals {
   tags = {Assignment = "CCGC 5502 Automation Assignment"
 Name = "firstname.lastname"

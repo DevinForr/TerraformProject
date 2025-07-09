@@ -19,6 +19,11 @@ variable "resource_group_name" {
 variable "linux_nic_ids" {
   description = "Map of Linux VM NIC IDs (vm1, vm2, vm3)"
   type        = map(string)
+  default     = {
+    vm1 = "vm1-nic-id"
+    vm2 = "vm2-nic-id"
+    vm3 = "vm3-nic-id"
+  }
 }
 
 locals {
