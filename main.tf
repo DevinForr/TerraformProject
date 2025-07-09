@@ -55,9 +55,9 @@ module "datadisk" {
   humber_id           = local.humber_id
   location            = local.location
   resource_group_name = module.rgroup.resource_group_name
-  vm_ids = merge(
-  zipmap(["vm0", "vm1", "vm2"], module.linux_vms.vm_ids),
-  { win = module.win_vm.vm_id }
+  vm_ids = concat(
+  module.linux_vms.vm_ids,
+  [module.win_vm.vm_id]
 )
 }
 
