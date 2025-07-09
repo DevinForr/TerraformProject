@@ -1,5 +1,9 @@
+locals {
+  vm_names = ["vm1", "vm2", "vm3"]
+}
+
 resource "null_resource" "hostname_exec" {
-  for_each = azurerm_linux_virtual_machine.vm
+  for_each = toset(local.vm_names)
 
   provisioner "remote-exec" {
     inline = ["hostname"]
@@ -8,7 +12,7 @@ resource "null_resource" "hostname_exec" {
       type     = "ssh"
       host     = azurerm_public_ip.vm_pip[each.key].ip_address
       user     = "azureuser"
-      password = "P@ssw0rd!"  
+      password = "P@ssw0rd!"
     }
   }
 
@@ -19,7 +23,7 @@ resource "null_resource" "hostname_exec" {
 }
 
 resource "azurerm_virtual_machine_extension" "network_watcher" {
-  for_each = var.linux_vm_ids
+  for_each = { for name, vm in azurerm_linux_virtual_machine.vm : name => vm.id }
 
   name                 = "network-watcher-${each.key}"
   virtual_machine_id   = each.value
@@ -29,10 +33,10 @@ resource "azurerm_virtual_machine_extension" "network_watcher" {
 }
 
 resource "azurerm_virtual_machine_extension" "azure_monitor" {
-  for_each = azurerm_linux_virtual_machine.vm
+  for_each = { for name, vm in azurerm_linux_virtual_machine.vm : name => vm.id }
 
   name                 = "azure-monitor-${each.key}"
-  virtual_machine_id   = each.value.id
+  virtual_machine_id   = each.value
   publisher            = "Microsoft.Azure.Monitor"
   type                 = "AzureMonitorLinuxAgent"
   type_handler_version = "1.0"
