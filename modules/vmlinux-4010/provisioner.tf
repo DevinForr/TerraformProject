@@ -33,12 +33,11 @@ locals {
 }
 
 resource "azurerm_virtual_machine_extension" "azure_monitor" {
-  for_each = var.linux_vm_ids  # map(name => vm_id)
+  for_each = module.linux_vms.vm_ids
 
   name               = "azure-monitor-${each.key}"
-  virtual_machine_id = each.value
-
-  publisher            = "Microsoft.Azure.Monitor"
-  type                 = "AzureMonitorLinuxAgent"
+  virtual_machine_id = each.value    # each.value is already the VM ID (string)
+  publisher          = "Microsoft.Azure.Monitor"
+  type               = "AzureMonitorLinuxAgent"
   type_handler_version = "1.0"
 }
