@@ -13,7 +13,7 @@ variable "location" {
 variable "resource_group_name" {
   type        = string
   description = "Resource group name"
-  default     = "${var.humber_id}-rg"
+  default     = "4010-rg"
 }
 
 variable "subnet_id" {

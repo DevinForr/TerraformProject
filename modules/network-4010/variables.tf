@@ -8,7 +8,7 @@ variable "location" {
 }
 
 variable "resource_group_name" {
-  default = "${var.humber_id}-RG"
+  default = "4010-RG"
 }
 
 locals {

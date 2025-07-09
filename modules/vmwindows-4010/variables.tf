@@ -1,26 +1,31 @@
 variable "humber_id" {
   description = "Last 4 digits of Humber ID"
   type        = string
+  default     = "4010"
 }
 
 variable "location" {
   description = "Azure region"
   type        = string
+  default     = "East US"
 }
 
 variable "resource_group_name" {
   description = "Name of the resource group"
   type        = string
+  default     = "4010-rg"
 }
 
 variable "subnet_id" {
-  description = "Subnet ID"
+  description = "ID of the subnet to attach the NIC"
   type        = string
+  default     = null
 }
 
 variable "diagnostics_storage_uri" {
-  description = "Storage account URI for boot diagnostics"
+  description = "URI of the storage account used for VM boot diagnostics"
   type        = string
+  default     = null
 }
 
 locals {
