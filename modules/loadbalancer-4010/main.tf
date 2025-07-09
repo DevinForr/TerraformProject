@@ -10,7 +10,7 @@ resource "azurerm_public_ip" "lb_public_ip" {
 }
 
 resource "azurerm_lb" "load_balancer" {
-  name                = "${var.humber_id}-lb"
+  name                = "n${var.humber_id}-lb"
   location            = var.location
   resource_group_name = var.resource_group_name
   sku                 = "Basic"

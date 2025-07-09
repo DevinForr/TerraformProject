@@ -15,7 +15,7 @@ resource "azurerm_public_ip" "win_pip" {
   resource_group_name = var.resource_group_name
   allocation_method   = "Dynamic"
   sku                 = "Basic"
-  domain_name_label   = "${var.humber_id}-winvm-${count.index}"
+  domain_name_label   = "n${var.humber_id}-winvm-${count.index}"
 
   tags = local.tags
 }

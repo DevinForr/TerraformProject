@@ -37,7 +37,7 @@ resource "azurerm_public_ip" "vm_pip" {
   resource_group_name = var.resource_group_name
   allocation_method   = "Dynamic"
   sku                 = "Basic"
-  domain_name_label   = "${var.humber_id}-dns-${each.key}" # must be unique across Azure
+  domain_name_label   = "n${var.humber_id}-dns-${each.key}" # must be unique across Azure
 
   tags = local.tags
 }

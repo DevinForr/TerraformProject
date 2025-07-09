@@ -9,7 +9,7 @@ resource "azurerm_log_analytics_workspace" "log_workspace" {
 }
 
 resource "azurerm_recovery_services_vault" "recovery_vault" {
-  name                = "${var.humber_id}-rsvault"
+  name                = "n${var.humber_id}-rsvault"
   location            = var.location
   resource_group_name = var.resource_group_name
   sku                 = "Standard"
