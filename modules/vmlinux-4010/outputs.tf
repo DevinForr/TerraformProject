@@ -21,7 +21,7 @@ output "nic_ids" {
 
 output "vm_ids" {
   value = {
-    for name in local.vm_names :
-    name => azurerm_linux_virtual_machine.vm[name].id
+    for vm_name, vm in azurerm_linux_virtual_machine.vm : vm_name => vm.id
   }
+  description = "Map of Linux VM IDs keyed by VM names"
 }
