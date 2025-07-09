@@ -18,3 +18,8 @@ output "nic_ids" {
   description = "NIC IDs for each Linux VM"
   value       = { for k, nic in azurerm_network_interface.nic : k => nic.id }
 }
+
+output "vm_ids" {
+  value       = [for vm in azurerm_linux_virtual_machine.vm : vm.id]
+  description = "List of Linux VM IDs"
+}

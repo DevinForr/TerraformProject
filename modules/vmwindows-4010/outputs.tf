@@ -17,3 +17,8 @@ output "public_ip" {
   value       = azurerm_public_ip.win_pip[0].ip_address
   description = "Public IP of the Windows VM"
 }
+
+output "vm_id" {
+  value       = azurerm_windows_virtual_machine.win_vm[0].id
+  description = "Windows VM ID"
+}
