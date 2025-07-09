@@ -1,7 +1,3 @@
-locals {
-  vm_names = ["vm1", "vm2", "vm3"]
-}
-
 resource "null_resource" "hostname_exec" {
   for_each = toset(local.vm_names)
 
