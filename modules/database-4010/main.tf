@@ -2,7 +2,7 @@ resource "azurerm_postgresql_flexible_server" "postgres" {
   name                   = "${var.humber_id}-pgserver"
   location               = var.location
   resource_group_name    = var.resource_group_name
-  sku_name               = "Standard_B1ms"
+  sku_name               = "Burstable_B1ms"
   administrator_login    = "pgadmin"
   administrator_password = "P@ssw0rd123!"
   storage_mb             = 32768
