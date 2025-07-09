@@ -7,7 +7,7 @@ variable "location" {
 }
 
 variable "resource_group_name" {
-  default = "4010-RG"
+  default = "rgroup-4010"
 }
 
 variable "admin_username" {

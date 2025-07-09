@@ -27,7 +27,7 @@ module "common" {
   humber_id           = local.humber_id
   location            = local.location
   resource_group_name = module.rgroup.resource_group_name
-  tags                = local.tags
+
 }
 
 module "linux_vms" {

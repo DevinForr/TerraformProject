@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "this" {
-  name     = "${var.humber_id}-RG"
+  name     = "rgroup-4010"
   location = var.location
 
 tags = local.tags

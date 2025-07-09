@@ -13,7 +13,7 @@ variable "location" {
 variable "resource_group_name" {
   type        = string
   description = "Resource group name"
-  default     = "4010-rg"
+  default     = "rgroup-4010"
 }
 
 variable "subnet_id" {
