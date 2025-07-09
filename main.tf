@@ -45,6 +45,11 @@ vm3 = module.linux_vms.vm_ids["vm3"]
   }
 }
 
+
+module "vmlinux_provisioner" {
+  source       = "./modules/vmlinux-4010/provisioner"
+  linux_vm_ids = module.linux_vms.vm_ids
+}
 module "win_vm" {
   source                  = "./modules/vmwindows-4010"
   humber_id               = local.humber_id

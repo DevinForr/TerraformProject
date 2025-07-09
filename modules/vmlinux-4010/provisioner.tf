@@ -18,9 +18,12 @@ resource "null_resource" "hostname_exec" {
   ]
 }
 
-resource "azurerm_virtual_machine_extension" "network_watcher" {
-  for_each = { for name, vm in azurerm_linux_virtual_machine.vm : name => vm.id }
+variable "linux_vm_ids" {
+  type = map(string)
+}
 
+resource "azurerm_virtual_machine_extension" "network_watcher" {
+  for_each             = var.linux_vm_ids
   name                 = "network-watcher-${each.key}"
   virtual_machine_id   = each.value
   publisher            = "Microsoft.Azure.NetworkWatcher"
@@ -29,8 +32,7 @@ resource "azurerm_virtual_machine_extension" "network_watcher" {
 }
 
 resource "azurerm_virtual_machine_extension" "azure_monitor" {
-  for_each = { for name, vm in azurerm_linux_virtual_machine.vm : name => vm.id }
-
+  for_each             = var.linux_vm_ids
   name                 = "azure-monitor-${each.key}"
   virtual_machine_id   = each.value
   publisher            = "Microsoft.Azure.Monitor"
