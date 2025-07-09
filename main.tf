@@ -56,9 +56,9 @@ module "datadisk" {
   location            = local.location
   resource_group_name = module.rgroup.resource_group_name
   vm_ids = merge(
-    module.linux_vms.vm_ids,
-    { win = module.win_vm.vm_id }
-  )
+  zipmap(["vm0", "vm1", "vm2"], module.linux_vms.vm_ids),
+  { win = module.win_vm.vm_id }
+)
 }
 
 module "loadbalancer" {

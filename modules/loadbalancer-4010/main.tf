@@ -4,7 +4,7 @@ resource "azurerm_public_ip" "lb_public_ip" {
   resource_group_name = var.resource_group_name
   allocation_method   = "Dynamic"
   sku                 = "Basic"
-  domain_name_label   = "${var.humber_id}-lb"
+  domain_name_label   = "n${var.humber_id}-lb"
 
   tags = local.tags
 }
