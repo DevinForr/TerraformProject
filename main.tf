@@ -1,6 +1,6 @@
 locals {
   humber_id = "4010"
-  location  = "canadacentral"
+  location  = "East US"
   tags = {
     Assignment     = "CCGC 5502 Automation Assignment"
     Name           = "firstname.lastname"
