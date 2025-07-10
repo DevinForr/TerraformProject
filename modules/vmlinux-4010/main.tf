@@ -22,11 +22,10 @@ resource "azurerm_public_ip" "vm_pip" {
 
   tags = local.tags
 }
-
 resource "azurerm_network_interface" "nic" {
-  for_each = toset(local.vm_names)
+  for_each = toset(["vm1", "vm2", "vm3"])
 
-  name                = "${var.humber_id}-nic-${each.key}"
+  name                = "4010-nic-${each.key}"
   location            = var.location
   resource_group_name = var.resource_group_name
 
@@ -34,44 +33,31 @@ resource "azurerm_network_interface" "nic" {
     name                          = "internal"
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.vm_pip[each.key].id
   }
-
-  tags = local.tags
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
-  for_each            = toset(local.vm_names)
+  for_each = azurerm_network_interface.nic
 
-  name                = "${var.humber_id}-${each.key}"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  size                = "Standard_B1ms"
-  admin_username      = "azureuser"
-  admin_password      = "P@ssw0rd!"
+  name                  = "4010-${each.key}"
+  location              = var.location
+  resource_group_name   = var.resource_group_name
+  network_interface_ids = [each.value.id]
+  size                  = "Standard_B1s"
+  admin_username        = "azureuser"
+  admin_password        = "P@ssword123!" # don't use in production
   disable_password_authentication = false
-
-  network_interface_ids = [
-    azurerm_network_interface.nic[each.key].id,
-  ]
-
-  availability_set_id = azurerm_availability_set.avset.id
 
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
+    name                 = "${each.key}-osdisk"
   }
 
   source_image_reference {
-    publisher = "OpenLogic"
-    offer     = "CentOS"
-    sku       = "8_2"
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "18.04-LTS"
     version   = "latest"
   }
-
-  boot_diagnostics {
-    storage_account_uri = var.diagnostics_storage_uri
-  }
-
-  tags = local.tags
 }

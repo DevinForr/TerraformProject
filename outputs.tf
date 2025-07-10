@@ -27,7 +27,7 @@ output "linux_vm_hostnames" {
 }
 
 output "linux_vm_public_ips" {
-  value = module.linux_vms.public_ips
+  value = module.linux_vms
 }
 
 output "win_vm_hostname" {

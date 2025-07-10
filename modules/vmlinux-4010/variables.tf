@@ -34,26 +34,6 @@ variable "diagnostics_storage_uri" {
     default     = null
 }
 
-variable "linux_vm_ids" {
-  description = "Map of Linux VM names to their IDs"
-  type        = map(string)
-   default = {
-    vm1 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Compute/virtualMachines/4010-vm1"
-    vm2 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Compute/virtualMachines/4010-vm2"
-    vm3 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Compute/virtualMachines/4010-vm3"
-  }
-}
-
-variable "linux_nic_ids" {
-  description = "Map of Linux VM names to their NIC IDs"
-  type        = map(string)
-  default = {
-    vm1 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm1"
-    vm2 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm2"
-    vm3 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm3"
-  }
-}
-
 locals {
   tags = {Assignment = "CCGC 5502 Automation Assignment"
 Name = "firstname.lastname"
@@ -62,6 +42,11 @@ Environment = "Learning"
   }
 
 
+}
+
+variable "linux_vm_ids" {
+  type    = map(string)
+  default = {}
 }
 
 variable "backend_pool_id" {

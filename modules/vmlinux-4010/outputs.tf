@@ -11,13 +11,15 @@ output "private_ips" {
 }
 
 output "vm_ids" {
-  value = { for name, vm in azurerm_linux_virtual_machine.vm : name => vm.id }
+  value = {
+    for vm_name, vm in azurerm_linux_virtual_machine.vm : vm_name => vm.id
+  }
 }
 
 output "nic_ids" {
-  value = { for name, nic in azurerm_network_interface.nic : name => nic.id }
+  value = {
+    for k, nic in azurerm_network_interface.nic :
+    k => nic.id
+  }
 }
 
-output "public_ips" {
-  value = { for name, pip in azurerm_public_ip.vm_pip : name => pip.ip_address }
-}
