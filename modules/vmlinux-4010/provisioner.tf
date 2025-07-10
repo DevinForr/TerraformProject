@@ -33,7 +33,7 @@ locals {
 }
 
 resource "azurerm_virtual_machine_extension" "azure_monitor" {
-  for_each = local.linux_vms.vm_ids
+  for_each = local.vm_names.vm_ids
 
   name               = "azure-monitor-${each.key}"
   virtual_machine_id = each.value    # each.value is already the VM ID (string)
