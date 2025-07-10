@@ -14,7 +14,7 @@ resource "azurerm_postgresql_flexible_server" "postgres" {
   tags = local.tags
 }
 resource "azurerm_postgresql_database" "defaultdb" {
-  name                = "${var.humber_id}-appdb"
+  name                = "postgres"
   resource_group_name = var.resource_group_name
   server_name         = azurerm_postgresql_flexible_server.postgres.name
   charset             = "UTF8"
