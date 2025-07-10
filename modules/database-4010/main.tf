@@ -13,11 +13,9 @@ resource "azurerm_postgresql_flexible_server" "postgres" {
 
   tags = local.tags
 }
-resource "azurerm_postgresql_database" "defaultdb" {
-  name                = "postgres"
-  resource_group_name = var.resource_group_name
-  server_name         = azurerm_postgresql_flexible_server.postgres.name
-  charset             = "UTF8"
-  collation           = "en_US.UTF8"
-  depends_on = [azurerm_postgresql_flexible_server.postgres]
+resource "azurerm_postgresql_flexible_server_database" "defaultdb" {
+  name      = "postgres"
+  server_id = azurerm_postgresql_flexible_server.postgres.id
+  charset   = "UTF8"
+  collation = "en_US.utf8"
 }
