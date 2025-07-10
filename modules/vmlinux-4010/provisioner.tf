@@ -33,7 +33,7 @@ type_handler_version = "1.4"
 }
 
 resource "azurerm_virtual_machine_extension" "azure_monitor" {
-  for_each = module.linux_vms.vm_ids
+  for_each = var.linux_vms.vm_ids
 
   name               = "azure-monitor-${each.key}"
   virtual_machine_id = each.value
@@ -43,7 +43,7 @@ resource "azurerm_virtual_machine_extension" "azure_monitor" {
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "lb_backend_assoc" {
-  for_each = module.linux_vms.nic_ids
+  for_each = var.linux_vms.nic_ids
 
   network_interface_id    = each.value
   ip_configuration_name   = "internal"
