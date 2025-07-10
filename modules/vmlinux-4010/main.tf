@@ -1,12 +1,4 @@
-locals {
-  vm_names = ["vm1", "vm2", "vm3"]
-  tags = {
-    Assignment     = "CCGC 5502 Automation Assignment"
-    Name           = "firstname.lastname"
-    ExpirationDate = "2024-12-31"
-    Environment    = "Learning"
-  }
-}
+
 
 resource "azurerm_availability_set" "avset" {
   name                         = "${var.humber_id}-avset"
