@@ -1,3 +1,13 @@
+locals {
+  vm_names = ["vm1", "vm2", "vm3"]
+  tags = {
+    Assignment     = "CCGC 5502 Automation Assignment"
+    Name           = "firstname.lastname"
+    ExpirationDate = "2024-12-31"
+    Environment    = "Learning"
+  }
+}
+
 resource "azurerm_availability_set" "avset" {
   name                         = "${var.humber_id}-avset"
   location                     = var.location
@@ -6,6 +16,19 @@ resource "azurerm_availability_set" "avset" {
   platform_update_domain_count = 2
   managed                      = true
   tags                         = local.tags
+}
+
+resource "azurerm_public_ip" "vm_pip" {
+  for_each            = toset(local.vm_names)
+
+  name                = "${var.humber_id}-pip-${each.key}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  allocation_method   = "Dynamic"
+  sku                 = "Basic"
+  domain_name_label   = "n${var.humber_id}-dns-${each.key}"
+
+  tags = local.tags
 }
 
 resource "azurerm_network_interface" "nic" {
@@ -21,19 +44,6 @@ resource "azurerm_network_interface" "nic" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.vm_pip[each.key].id
   }
-
-  tags = local.tags
-}
-
-resource "azurerm_public_ip" "vm_pip" {
-  for_each            = toset(local.vm_names)
-
-  name                = "${var.humber_id}-pip-${each.key}"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  allocation_method   = "Dynamic"
-  sku                 = "Basic"
-  domain_name_label   = "n${var.humber_id}-dns-${each.key}" # must be unique across Azure
 
   tags = local.tags
 }
