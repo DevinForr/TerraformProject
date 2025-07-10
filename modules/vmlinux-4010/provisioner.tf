@@ -35,11 +35,12 @@ type_handler_version = "1.4"
 resource "azurerm_virtual_machine_extension" "azure_monitor" {
   for_each = var.linux_vm_ids
 
-  name                 = "azure-monitor-${each.key}"
+  name                 = "AzureMonitorLinuxAgent-${each.key}"
   virtual_machine_id   = each.value
   publisher            = "Microsoft.Azure.Monitor"
   type                 = "AzureMonitorLinuxAgent"
-  type_handler_version = "1.0"
+  type_handler_version = "1.27"  # Use latest stable
+  auto_upgrade_minor_version = true
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "lb_backend_assoc" {
