@@ -28,9 +28,17 @@ module "linux_vms" {
   location                 = local.location
   resource_group_name      = module.rgroup.resource_group_name
   subnet_id                = module.network.subnet_id
-  backend_pool_id         = module.loadbalancer.backend_pool_id
-  linux_vm_ids  = module.linux_vms.vm_ids   
-  linux_nic_ids = module.linux_vms.nic_ids   
+  linux_vm_ids = {
+    vm1 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Compute/virtualMachines/4010-vm1"
+    vm2 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Compute/virtualMachines/4010-vm2"
+    vm3 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Compute/virtualMachines/4010-vm3"
+  }
+  linux_nic_ids = {
+    vm1 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm1"
+    vm2 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm2"
+    vm3 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm3"
+  }
+  backend_pool_id = module.loadbalancer.backend_pool_id   
 }
 
 module "loadbalancer" {
