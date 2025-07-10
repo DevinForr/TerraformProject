@@ -44,13 +44,7 @@ resource "azurerm_virtual_machine_extension" "azure_monitor" {
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "lb_backend_assoc" {
-  #for_each = var.linux_nic_ids
-
-  for_each = {
-    vm1 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm1"
-    vm2 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm2"
-    vm3 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm3"
-  }
+  for_each = var.linux_nic_ids
 
 
 
