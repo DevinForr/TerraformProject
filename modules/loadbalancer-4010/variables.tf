@@ -17,9 +17,14 @@ variable "resource_group_name" {
 }
 
 variable "linux_nic_ids" {
-  type        = map(string)
-  description = "NICs of Linux VMs to attach to backend pool"
+  type = map(string)
+  default = {
+    vm1 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm1"
+    vm2 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm2"
+    vm3 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm3"
+  }
 }
+
 locals {
   tags = {Assignment = "CCGC 5502 Automation Assignment"
 Name = "firstname.lastname"

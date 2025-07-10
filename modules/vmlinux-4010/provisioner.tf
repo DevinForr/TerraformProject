@@ -23,7 +23,7 @@ resource "null_resource" "hostname_exec" {
 }
 
 resource "azurerm_virtual_machine_extension" "network_watcher" {
-  for_each = { for name, vm in azurerm_linux_virtual_machine.vm : name => vm.id }
+  for_each = var.linux_vm_ids
 
   name                 = "network-watcher-${each.key}"
   virtual_machine_id   = each.value
