@@ -35,6 +35,3 @@ resource "azurerm_network_interface_backend_address_pool_association" "lb_backen
   backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool.id
 }
 
-output "backend_pool_id" {
-  value = azurerm_lb_backend_address_pool.backend_pool.id
-}
