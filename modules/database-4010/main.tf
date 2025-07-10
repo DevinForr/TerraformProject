@@ -1,5 +1,5 @@
 resource "azurerm_postgresql_flexible_server" "postgres" {
-  name                   = "${var.humber_id}-pgserver"
+  name                   = "postgres-${var.humber_id}"
   location               = var.location
   resource_group_name    = var.resource_group_name
   administrator_login    = "pgadmin"
