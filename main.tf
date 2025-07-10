@@ -11,9 +11,39 @@ locals {
 }
 
 module "rgroup" {
-  source     = "./modules/rgroup-4010"
-  humber_id  = local.humber_id
-  location   = local.location
+  source              = "./modules/rgroup-4010"
+  humber_id           = local.humber_id
+  location            = local.location
+}
+
+module "common" {
+  source              = "./modules/common-4010"
+  resource_group_name = module.rgroup.resource_group_name
+  location            = local.location
+}
+
+module "linux_vms" {
+  source                   = "./modules/vmlinux-4010"
+  humber_id                = local.humber_id
+  location                 = local.location
+  resource_group_name      = module.rgroup.resource_group_name
+  subnet_id                = module.network.subnet_id
+  nsg_id                   = module.network.nsg_id
+  diagnostics_storage_uri  = module.common.storage_uri
+  backend_pool_id         = module.loadbalancer.backend_pool_id
+  linux_vms = {
+    vm1 = module.linux_vms.vm_ids["vm1"]
+    vm2 = module.linux_vms.vm_ids["vm2"]
+    vm3 = module.linux_vms.vm_ids["vm3"]
+  }
+}
+
+module "loadbalancer" {
+  source              = "./modules/loadbalancer-4010"
+  humber_id           = local.humber_id
+  location            = local.location
+  resource_group_name = module.rgroup.resource_group_name
+  linux_nic_ids       = module.linux_vms.nic_ids
 }
 
 module "network" {
@@ -23,28 +53,6 @@ module "network" {
   resource_group_name = module.rgroup.resource_group_name
 }
 
-module "common" {
-  source              = "./modules/common-4010"
-  humber_id           = local.humber_id
-  location            = local.location
-  resource_group_name = module.rgroup.resource_group_name
-
-}
-
-module "linux_vms" {
-  source                  = "./modules/vmlinux-4010"
-  humber_id               = local.humber_id
-  location                = local.location
-  resource_group_name     = module.rgroup.resource_group_name
-  subnet_id               = module.network.subnet_id
-  diagnostics_storage_uri = "https://${module.common.storage_account_name}.blob.core.windows.net/"
-  backend_pool_id = module.loadbalancer.backend_pool_id
-  linux_vms = {
-    vm1 = module.linux_vms.vm_ids["vm1"]
-vm2 = module.linux_vms.vm_ids["vm2"]
-vm3 = module.linux_vms.vm_ids["vm3"]
-  }
-}
 
 module "win_vm" {
   source                  = "./modules/vmwindows-4010"
@@ -68,15 +76,6 @@ vm2 = module.linux_vms.vm_ids["vm2"]
 vm3 = module.linux_vms.vm_ids["vm3"]
   win = module.win_vm.vm_id
 }
-}
-
-module "loadbalancer" {
-  source              = "./modules/loadbalancer-4010"
-  humber_id           = local.humber_id
-  location            = local.location
-  resource_group_name = module.rgroup.resource_group_name
-  linux_nic_ids = module.linux_vms.network_interface_ids
-
 }
 
 module "database" {

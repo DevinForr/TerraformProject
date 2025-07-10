@@ -4,13 +4,12 @@ resource "azurerm_public_ip" "lb_public_ip" {
   resource_group_name = var.resource_group_name
   allocation_method   = "Dynamic"
   sku                 = "Basic"
-  domain_name_label = "n${lower(replace(var.humber_id, "[^a-z0-9-]", ""))}-lb"
-
-  tags = local.tags
+  domain_name_label   = "n${lower(var.humber_id)}-lb"
+  tags                = local.tags
 }
 
 resource "azurerm_lb" "load_balancer" {
-  name                = "n${var.humber_id}-lb"
+  name                = "${var.humber_id}-lb"
   location            = var.location
   resource_group_name = var.resource_group_name
   sku                 = "Basic"
@@ -36,3 +35,6 @@ resource "azurerm_network_interface_backend_address_pool_association" "lb_backen
   backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool.id
 }
 
+output "backend_pool_id" {
+  value = azurerm_lb_backend_address_pool.backend_pool.id
+}

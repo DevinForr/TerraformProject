@@ -17,7 +17,8 @@ variable "resource_group_name" {
 }
 
 variable "linux_nic_ids" {
-  type = map(string)
+  type        = map(string)
+  description = "NICs of Linux VMs to attach to backend pool"
 }
 locals {
   tags = {Assignment = "CCGC 5502 Automation Assignment"
@@ -26,3 +27,4 @@ ExpirationDate = "2024-12-31"
 Environment = "Learning"
   }
 }
+
