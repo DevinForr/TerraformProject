@@ -34,11 +34,15 @@ variable "diagnostics_storage_uri" {
     default     = null
 }
 
-variable "linux_vms" {
+variable "linux_vm_ids" {
+  description = "Map of Linux VM names to their IDs"
   type        = map(string)
-  description = "Map of Linux VM IDs (vm0, vm1, vm2)"
 }
 
+variable "linux_nic_ids" {
+  description = "Map of Linux VM names to their NIC IDs"
+  type        = map(string)
+}
 locals {
   tags = {Assignment = "CCGC 5502 Automation Assignment"
 Name = "firstname.lastname"

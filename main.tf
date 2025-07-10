@@ -29,11 +29,8 @@ module "linux_vms" {
   resource_group_name      = module.rgroup.resource_group_name
   subnet_id                = module.network.subnet_id
   backend_pool_id         = module.loadbalancer.backend_pool_id
-  linux_vms = {
-    vm1 = module.linux_vms.vm_ids["vm1"]
-    vm2 = module.linux_vms.vm_ids["vm2"]
-    vm3 = module.linux_vms.vm_ids["vm3"]
-  }
+  linux_vm_ids  = module.linux_vms.vm_ids   
+  linux_nic_ids = module.linux_vms.nic_ids   
 }
 
 module "loadbalancer" {

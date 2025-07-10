@@ -33,17 +33,17 @@ type_handler_version = "1.4"
 }
 
 resource "azurerm_virtual_machine_extension" "azure_monitor" {
-  for_each = var.linux_vms.vm_ids
+  for_each = var.linux_vm_ids
 
-  name               = "azure-monitor-${each.key}"
-  virtual_machine_id = each.value
+  name                 = "azure-monitor-${each.key}"
+  virtual_machine_id   = each.value
   publisher            = "Microsoft.Azure.Monitor"
   type                 = "AzureMonitorLinuxAgent"
   type_handler_version = "1.0"
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "lb_backend_assoc" {
-  for_each = var.linux_vms.nic_ids
+  for_each = var.linux_nic_ids
 
   network_interface_id    = each.value
   ip_configuration_name   = "internal"
