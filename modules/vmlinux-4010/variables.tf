@@ -34,7 +34,7 @@ variable "diagnostics_storage_uri" {
     default     = null
 }
 
-variable "linux_vm_ids" {
+variable "linux_vms" {
   type        = map(string)
   description = "Map of Linux VM IDs (vm0, vm1, vm2)"
 }
@@ -47,4 +47,9 @@ Environment = "Learning"
   }
 
 
+}
+
+variable "backend_pool_id" {
+  description = "ID of the backend address pool from the load balancer"
+  type        = string
 }

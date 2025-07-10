@@ -38,7 +38,8 @@ module "linux_vms" {
   resource_group_name     = module.rgroup.resource_group_name
   subnet_id               = module.network.subnet_id
   diagnostics_storage_uri = "https://${module.common.storage_account_name}.blob.core.windows.net/"
-  linux_vm_ids = {
+  backend_pool_id = module.loadbalancer.backend_pool_id
+  linux_vms = {
     vm1 = module.linux_vms.vm_ids["vm1"]
 vm2 = module.linux_vms.vm_ids["vm2"]
 vm3 = module.linux_vms.vm_ids["vm3"]

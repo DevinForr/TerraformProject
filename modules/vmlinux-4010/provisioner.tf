@@ -47,5 +47,5 @@ resource "azurerm_network_interface_backend_address_pool_association" "lb_backen
 
   network_interface_id    = each.value
   ip_configuration_name   = "internal"
-  backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool.id
+  backend_address_pool_id = var.backend_pool_id
 }
