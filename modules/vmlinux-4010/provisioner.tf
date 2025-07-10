@@ -1,3 +1,7 @@
+locals {
+  vm_names = ["vm1", "vm2", "vm3"]
+}
+
 resource "null_resource" "hostname_exec" {
   for_each = toset(local.vm_names)
 
@@ -18,26 +22,22 @@ resource "null_resource" "hostname_exec" {
   ]
 }
 
-
 resource "azurerm_virtual_machine_extension" "network_watcher" {
-  for_each             = var.linux_vm_ids
+  for_each = { for name, vm in azurerm_linux_virtual_machine.vm : name => vm.id }
+
   name                 = "network-watcher-${each.key}"
   virtual_machine_id   = each.value
   publisher            = "Microsoft.Azure.NetworkWatcher"
-  type                 = "NetworkWatcherAgentLinux"
-  type_handler_version = "1.4"
-}
-
-locals {
-  vm_map = azurerm_linux_virtual_machine.vm
+type                 = "NetworkWatcherAgentLinux"
+type_handler_version = "1.4"
 }
 
 resource "azurerm_virtual_machine_extension" "azure_monitor" {
-  for_each = local.vm_names
+  for_each = module.linux_vms.vm_ids
 
   name               = "azure-monitor-${each.key}"
-  virtual_machine_id = each.value    # each.value is already the VM ID (string)
-  publisher          = "Microsoft.Azure.Monitor"
-  type               = "AzureMonitorLinuxAgent"
+  virtual_machine_id = each.value
+  publisher            = "Microsoft.Azure.Monitor"
+  type                 = "AzureMonitorLinuxAgent"
   type_handler_version = "1.0"
 }
