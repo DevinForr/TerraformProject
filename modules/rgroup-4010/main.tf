@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "this" {
-  name     = "rgroup-4010"
+  name     = "new_group-4010"
   location = var.location
 
 tags = local.tags

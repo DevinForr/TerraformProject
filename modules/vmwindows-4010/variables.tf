@@ -4,17 +4,9 @@ variable "humber_id" {
   default     = "4010"
 }
 
-variable "location" {
-  description = "Azure region"
-  type        = string
-  default     = "East US"
-}
+variable "location" {}
 
-variable "resource_group_name" {
-  description = "Name of the resource group"
-  type        = string
-  default     = "rgroup-4010"
-}
+variable "resource_group_name" {}
 
 variable "subnet_id" {
   description = "ID of the subnet to attach the NIC"

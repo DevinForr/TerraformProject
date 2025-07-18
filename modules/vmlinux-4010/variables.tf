@@ -4,17 +4,9 @@ variable "humber_id" {
     default     = "4010"
 }
 
-variable "location" {
-  type        = string
-  description = "Azure region"
-  default     = "East US"
-}
+variable "location" {}
 
-variable "resource_group_name" {
-  type        = string
-  description = "Resource group name"
-  default     = "rgroup-4010"
-}
+variable "resource_group_name" {}
 
 variable "subnet_id" {
   type        = string

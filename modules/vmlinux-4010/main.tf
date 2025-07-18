@@ -47,6 +47,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   admin_username        = "azureuser"
   admin_password        = "P@ssword123!" # don't use in production
   disable_password_authentication = false
+  availability_set_id = azurerm_availability_set.avset.id
 
   os_disk {
     caching              = "ReadWrite"

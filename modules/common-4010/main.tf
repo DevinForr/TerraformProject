@@ -18,7 +18,7 @@ resource "azurerm_recovery_services_vault" "recovery_vault" {
 }
 
 resource "azurerm_storage_account" "storage" {
-  name                     = "${var.humber_id}commonstore"
+  name                     = "${var.humber_id}commonsa"
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_tier             = "Standard"

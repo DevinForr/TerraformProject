@@ -4,7 +4,7 @@ resource "azurerm_public_ip" "lb_public_ip" {
   resource_group_name = var.resource_group_name
   allocation_method   = "Dynamic"
   sku                 = "Basic"
-  domain_name_label   = "n${lower(var.humber_id)}-lb"
+  domain_name_label   = "n${lower(var.humber_id)}-lb1"
   tags                = local.tags
 }
 
@@ -29,9 +29,9 @@ resource "azurerm_lb_backend_address_pool" "backend_pool" {
 
 resource "azurerm_network_interface_backend_address_pool_association" "lb_backend_assoc" {
    for_each = {
-    vm1 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm1"
-    vm2 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm2"
-    vm3 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/rgroup-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm3"
+    vm1 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/new_group-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm1"
+    vm2 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/new_group-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm2"
+    vm3 = "/subscriptions/6d9bf65c-e849-4efc-9343-a8daff569d0c/resourceGroups/new_group-4010/providers/Microsoft.Network/networkInterfaces/4010-nic-vm3"
   }
 
 
